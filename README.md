@@ -4,7 +4,7 @@ Com o intuito de estudar inteligência artificial, este repositório foi criado 
 
 Dividido em três pastas diferentes: 
 
-`exercícios` códigos para o Kaggle; exemplos do livro Mãos à Obra - Aprendizado de Máquina; entre outros exemplos, 
+`exercícios` com códigos para o Kaggle; exemplos do livro Mãos à Obra - Aprendizado de Máquina; entre outros exemplos, 
 
 `livros` com arquivos dos livros utilizados: Curso Intensivo de Python, Mãos à Obra - Aprendizado de Máquina, Python para Análise de Dados e 
 
