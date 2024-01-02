@@ -139,3 +139,61 @@ print(add_five(7)) # 12
 # e dizemos que add_numbers sofreu currying
 
 # geradores
+
+# protocolo iterador é um modo genérico de deixar objetos iteráveis; por exemplo, com um dicionário
+
+some_dict = {'a': 1, 'b': 2, 'c': 3}
+for key in some_dict:
+  print(key) # a b c
+
+# quando escrevemos for key in some_dict, o interpretador Python tenta criar um iterador a partir
+# de some_dict
+
+dict_iterator = iter(some_dict)
+print(dict_iterator) # <dict_keyiterator object at 0x000001DD54F29DF0>
+
+# um iterador é qualquer objeto que irá produzir objetos ao interpretador quando usado em um
+# contexto como um laço for; a maioria dos métodos que espera uma lista também podem ser usados
+# com objetos iteráveis (min, max, sum e construtores list e tuple)
+
+print(list(dict_iterator)) # ['a', 'b', 'c']
+
+# um gerador é uma forma de construir um novo objeto iterável; funções usuais executam e 
+# devolvem um único resultado de uma só vez, geradores devolvem uma sequência de vários
+# resultados em modo lazy, com uma pausa após cada um; para criar um gerador, usamos 
+# yield no lugar de return em uma função comum
+
+def squares(n = 10):
+  print('Generating squares from 1 to %d.' % (n**2))
+  for i in range(1, n + 1):
+    yield i ** 2
+
+# quando chamar o gerador, nenhum código será executado:
+
+gen = squares()
+print(gen) # <generator object squares at 0x0000022F0D895A80>
+
+# ele só executará quando você lhe solicitar elementos:
+
+for x in gen:
+  print(x, end=' ') 
+# Generating squares from 1 to 100.
+# 1 4 9 16 25 36 49 64 81 100
+
+# podemos criar um gerador usando uma expressão geradora (mais concisa); é um gerador
+# análogo a list, dict e set comprehensions; a diferença é o uso de parênteses
+
+gen = (x**2 for x in range(100))
+print(gen) # <generator object <genexpr> at 0x000001807EDFE260>
+
+# isso é equivalente a:
+
+def _make_gen():
+  for x in range(100):
+    yield x**2
+gen = _make_gen()
+
+# expressões geradoras podem ser usadas no lugar de list comprehensions como argumentos de função
+
+print(sum(x**2 for x in range(100)))      # 328350
+print(dict((i, i**2) for i in range(5)))  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
